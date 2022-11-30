@@ -5,39 +5,21 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "bookshop",
-      "command": "npx cds watch bookshop",
-      "type": "node-terminal",
-      "request": "launch",
-      "skipFiles": [
-        "<node_internals>/**",
-        "**/node_modules/**",
-        "**/cds/lib/lazy.js",
-        "**/cds/lib/req/cls.js",
-        "**/odata-v4/okra/**"
-      ]
+      "name": "Attach to...",
+      "type": "node",
+      "request": "attach",
+      "processId": "${command:PickProcess}",
+      "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "Fiori App",
-      "command": "npx cds watch fiori",
-      "type": "node-terminal",
+      "name": "cds run",
+      "type": "node",
       "request": "launch",
-      "skipFiles": [
-        "<node_internals>/**",
-        "**/node_modules/**",
-        "**/cds/lib/lazy.js",
-        "**/cds/lib/req/cls.js",
-        "**/odata-v4/okra/**"
-      ]
-    }
-  ],
-  "inputs": [
-    {
-      "type": "pickString",
-      "id": "sample",
-      "description": "Which sample do you want to start?",
-      "options": [ "bookshop", "fiori", "reviews", "reviews" ],
-      "default": "bookshop"
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-n"],
+      "args": ["--", "cds", "run", "--with-mocks", "--in-memory?"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
